@@ -60,7 +60,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>com.github.jsimone</groupId>
-                                    <artifactId>webapp-runner-main</artifactId>
+                                    <artifactId>webapp-runner-master</artifactId>
                                     <version>8.5.23.1</version>
                                     <destFileName>webapp-runner.jar</destFileName>
                                 </artifactItem>
