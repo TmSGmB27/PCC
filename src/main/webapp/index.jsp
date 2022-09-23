@@ -14,12 +14,4 @@
     <body>
         <h1>Miguel Ángel Rojas Betancourt</h1>
 
-        <form action="Control" method="get">
-            <label>Nombres:  </label>
-            <input type="text" name="txt_nombres" required/>
-            <label>Apellidos:  </label>
-            <input type="text" name="txt_apellidos" required/>
-            
-        </form> 
-
 </html>
