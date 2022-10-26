@@ -1,12 +1,21 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package com.mycompany.pcc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ *
+ * @author mianr
+ */
 public class Control extends HttpServlet {
 
     /**
@@ -47,38 +56,51 @@ public class Control extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         //processRequest(request, response);
+
+        String nombres = request.getParameter("sign_nombre");
+        String telefono = request.getParameter("sign_telefono");
+        String correo = request.getParameter("sign_email");
+        String clave = request.getParameter("sign_clave");
+        PersonaDTO persona = new PersonaDTO(nombres, telefono, correo, clave);
+        
         response.setContentType("text/html;charset=UTF-8");
-
-        String n = request.getParameter("txt_nombres");
-        String a = request.getParameter("txt_apellidos");
-
+        
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>respuesta1</title>");
+            out.println("<title>respuesta 1</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>El domiciolio llegò: " + n + " " + a + "</h1>");
-            out.println("<h1>esta es un respuesta control</h1>");
+            out.println("<h1>El Mensaje ha sido enviado en nombre de: " + persona.toString() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
+        PersonaDAO dao = new PersonaDAO();
+        List<PersonaDTO> lista = dao.readAll();
+        for (PersonaDTO i : lista) {
+            System.out.println(i.toString());
+        }
+
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
