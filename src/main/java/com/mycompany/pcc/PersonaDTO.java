@@ -3,9 +3,9 @@ package com.mycompany.pcc;
 import java.io.Serializable;
 import java.util.Objects;
 
+public class PersonaDTO implements Serializable {
 
-public class PersonaDTO implements Serializable{
-    private String nombres; 
+    private String nombres;
     private String telefono;
     private String correo;
     private String clave;
@@ -16,6 +16,7 @@ public class PersonaDTO implements Serializable{
         this.correo = correo;
         this.clave = clave;
     }
+
     public PersonaDTO() {
         this.nombres = "";
         this.telefono = "";
@@ -57,7 +58,10 @@ public class PersonaDTO implements Serializable{
 
     @Override
     public String toString() {
-        return "nombres=" + nombres + ", telefono=" + telefono + ", correo=" + correo + ", contraseña=" + clave;
+        return "Nombre= " + nombres
+                + "\n telefono= " + telefono
+                + "\n correo= " + correo
+                + "\n contraseña= " + clave;
     }
 
     @Override
@@ -93,6 +97,5 @@ public class PersonaDTO implements Serializable{
         }
         return Objects.equals(this.clave, other.clave);
     }
-    
-    
+
 }
