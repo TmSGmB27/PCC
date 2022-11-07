@@ -42,7 +42,7 @@
                     <br/>
                     <input type="password" name="sign_clave" required/>
                     <br/>
-                    <button type="submit" id="sign_boton">Sign In</button>
+                    <button type="submit" name="accion" value="Register">Sign In</button>
                     <br/>
                 </form>
             </div>

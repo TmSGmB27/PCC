@@ -4,9 +4,17 @@
         <servlet-name>Control</servlet-name>
         <servlet-class>com.mycompany.pcc.Control</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Validar</servlet-name>
+        <servlet-class>com.mycompany.pcc.Validar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Control</servlet-name>
         <url-pattern>/Control</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Validar</servlet-name>
+        <url-pattern>/Validar</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

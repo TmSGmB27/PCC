@@ -30,7 +30,7 @@
                     <br/>
                     <input type="password" name="log_clave">
                     <br/>
-                    <button type="submit" >Log In</button>
+                    <button type="submit" name="accion" value="login">Log In</button>
                     <br/>
 
                 </form>

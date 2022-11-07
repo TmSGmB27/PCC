@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.mycompany.pcc;
 
 import java.io.IOException;
@@ -72,34 +68,42 @@ public class Control extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
 
-        String nombres = request.getParameter("sign_nombre");
-        String telefono = request.getParameter("sign_telefono");
-        String correo = request.getParameter("sign_email");
-        String clave = request.getParameter("sign_clave");
-        PersonaDTO persona = new PersonaDTO(nombres, telefono, correo, clave);
-        
-        response.setContentType("text/html;charset=UTF-8");
-        
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>respuesta 1</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>El Mensaje ha sido enviado en nombre de: " + persona.toString() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PersonaDTO Pdto;
+        PersonaDAO Pdao = new PersonaDAO();
+        String accion = request.getParameter("accion");
+
+        if (accion.equals("login")) {
+
+            String correo = request.getParameter("log_correo");
+            String clave = (String) request.getParameter("log_clave");
+
+            Pdto = Pdao.consultar(correo, clave);
+
+            if (Pdto.getClave().equals(clave)) {
+                request.setAttribute("usuario", request.getParameter("log_correo"));
+                request.setAttribute("telefono", Pdto.getTelefono());
+                request.setAttribute("correo", Pdto.getCorreo());
+                request.setAttribute("clave", Pdto.getClave());
+                request.getRequestDispatcher("principal.jsp").forward(request, response);
+            } else {
+                request.setAttribute("REGISTRO", "Wrong email or password");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
         }
-        PersonaDAO dao = new PersonaDAO();
-        List<PersonaDTO> lista = dao.readAll();
-        for (PersonaDTO i : lista) {
-            System.out.println(i.toString());
+        if (accion.equals("Register")) {
+            //Registro exitoso
+            String nombres = request.getParameter("sign_nombre");
+            String correo = request.getParameter("sign_email");
+            String telefono = request.getParameter("sign_correo");
+            String clave = request.getParameter("sign_clave");
+            Pdto = new PersonaDTO(nombres, telefono, correo, clave);
+            if (Pdao.insertar(Pdto)) {
+                request.setAttribute("EXITO", "Account registered successfully");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
         }
 
     }
-
 
     @Override
     public String getServletInfo() {
